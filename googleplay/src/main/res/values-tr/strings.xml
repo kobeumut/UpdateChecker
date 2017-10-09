@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">vChecker</string>
+    <string name="ok">Tamam</string>
+    <string name="cancel">İptal</string>
+    <string name="update_available">Uygulamanın yeni sürümü mevcut. Güncel versiyonu yüklemeniz gerekmektedir.</string>
+</resources>

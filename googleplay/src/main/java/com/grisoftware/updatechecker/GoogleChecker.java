@@ -120,7 +120,6 @@ public class GoogleChecker {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
 
-                                        final String appPackageName = context.getPackageName(); // getPackageName() from Context or Activity object
 
                                         //onEvent();
 //                                        new Listener() {

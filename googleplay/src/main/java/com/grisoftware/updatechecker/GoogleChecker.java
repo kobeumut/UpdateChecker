@@ -42,20 +42,22 @@ public class GoogleChecker {
     private ImageLoader mImageLoader;
     private String TAG = "GoogleChecker.java";
     private String appPackageName;
+    private Context context;
 
     public GoogleChecker(final Activity activity,final Boolean haveNoButton) {
-        RequestQueue queue = Volley.newRequestQueue(activity.getApplicationContext());
-        appPackageName = activity.getApplicationContext().getPackageName();
-
+        RequestQueue queue = Volley.newRequestQueue(activity.getBaseContext());
+        appPackageName = activity.getBaseContext().getPackageName();
+        context = activity;
         String url = PLAY_STORE_ROOT_WEB + appPackageName;
-        control(activity.getApplicationContext(), activity, queue, url,haveNoButton);
+        control(context, activity, queue, url,haveNoButton);
     }
 
     public GoogleChecker(String packageName, final Activity activity, final Boolean haveNoButton) {
         RequestQueue queue = Volley.newRequestQueue(activity.getApplicationContext());
         appPackageName = packageName;
         String url = PLAY_STORE_ROOT_WEB + packageName;
-        control(activity.getApplicationContext(), activity, queue, url, haveNoButton);
+        context = activity;
+        control(context, activity, queue, url, haveNoButton);
     }
 
     public static void AlertDialog(int message, Context c, boolean haveno, DialogInterface.OnClickListener listener) {

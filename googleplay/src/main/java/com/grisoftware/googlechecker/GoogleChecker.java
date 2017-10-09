@@ -45,7 +45,14 @@ public class GoogleChecker {
     public GoogleChecker(final Context context, final Activity activity) {
         RequestQueue queue = Volley.newRequestQueue(context);
         String url = PLAY_STORE_ROOT_WEB + context.getPackageName();
-
+        control(context, activity, queue, url);
+    }
+    public GoogleChecker(final Context context, String packageName, final Activity activity) {
+        RequestQueue queue = Volley.newRequestQueue(context);
+        String url = PLAY_STORE_ROOT_WEB + packageName;
+        control(context, activity, queue, url);
+    }
+    private void control(final Context context, final Activity activity, RequestQueue queue, String url) {
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {

@@ -41,17 +41,21 @@ public class GoogleChecker {
     private RequestQueue mRequestQueue;
     private ImageLoader mImageLoader;
     private String TAG = "GoogleChecker.java";
+    private String appPackageName;
 
-    public GoogleChecker(final Context context, final Activity activity) {
+    public GoogleChecker(final Activity activity,final Boolean haveNoButton) {
         RequestQueue queue = Volley.newRequestQueue(activity.getApplicationContext());
-        String url = PLAY_STORE_ROOT_WEB + activity.getApplicationContext().getPackageName();
-        control(context, activity, queue, url);
+        appPackageName = activity.getApplicationContext().getPackageName();
+
+        String url = PLAY_STORE_ROOT_WEB + appPackageName;
+        control(activity.getApplicationContext(), activity, queue, url,haveNoButton);
     }
 
-    public GoogleChecker(String packageName, final Context context, final Activity activity) {
-        RequestQueue queue = Volley.newRequestQueue(context);
+    public GoogleChecker(String packageName, final Activity activity, final Boolean haveNoButton) {
+        RequestQueue queue = Volley.newRequestQueue(activity.getApplicationContext());
+        appPackageName = packageName;
         String url = PLAY_STORE_ROOT_WEB + packageName;
-        control(context, activity, queue, url);
+        control(activity.getApplicationContext(), activity, queue, url, haveNoButton);
     }
 
     public static void AlertDialog(int message, Context c, boolean haveno, DialogInterface.OnClickListener listener) {
@@ -72,7 +76,7 @@ public class GoogleChecker {
         alert.show();
     }
 
-    private void control(final Context context, final Activity activity, RequestQueue queue, String url) {
+    private void control(final Context context, final Activity activity, RequestQueue queue, String url, final Boolean haveno) {
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -110,7 +114,7 @@ public class GoogleChecker {
                             //Log.e("versiyonpopup", isThereNewVersion + ":" + newversion + ":" + newMarketVersion);
                             if (isThereNewVersion) {
 
-                                AlertDialog(R.string.update_available, context, false, new DialogInterface.OnClickListener() {
+                                AlertDialog(R.string.update_available, context, haveno, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
 

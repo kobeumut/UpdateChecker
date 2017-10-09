@@ -43,8 +43,14 @@ public class GoogleChecker {
     private String TAG = "GoogleChecker.java";
 
     public GoogleChecker(final Context context, final Activity activity) {
+        RequestQueue queue = Volley.newRequestQueue(activity.getApplicationContext());
+        String url = PLAY_STORE_ROOT_WEB + activity.getApplicationContext().getPackageName();
+        control(context, activity, queue, url);
+    }
+
+    public GoogleChecker(String packageName, final Context context, final Activity activity) {
         RequestQueue queue = Volley.newRequestQueue(context);
-        String url = PLAY_STORE_ROOT_WEB + context.getPackageName();
+        String url = PLAY_STORE_ROOT_WEB + packageName;
         control(context, activity, queue, url);
     }
 

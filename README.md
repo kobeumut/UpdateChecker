@@ -2,7 +2,7 @@
 Update Checker For Google Play
 
 [![](https://jitpack.io/v/kobeumut/UpdateChecker.svg)](https://jitpack.io/#kobeumut/UpdateChecker)
-
+Used Google Volley(HTTP Library) for check version.
 
 
 Add it in your root build.gradle at the end of repositories:
@@ -18,7 +18,7 @@ Add it in your root build.gradle at the end of repositories:
 Add the dependency
 
 	dependencies {
-	        compile 'com.github.kobeumut:UpdateChecker:0.1.1'
+	        compile 'com.github.kobeumut:UpdateChecker:0.1.2'
 	}
   
   
@@ -38,7 +38,7 @@ Or Maven
 	<dependency>
 	    <groupId>com.github.kobeumut</groupId>
 	    <artifactId>UpdateChecker</artifactId>
-	    <version>0.1.1</version>
+	    <version>0.1.2</version>
 	</dependency>
 
 

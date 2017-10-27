@@ -4,11 +4,10 @@ android {
     compileSdkVersion 26
     buildToolsVersion "26.0.2"
     defaultConfig {
-//        applicationId "com.grisoftware.updatechecker"
         minSdkVersion 14
         targetSdkVersion 26
         versionCode 1
-        versionName "0.1.2"
+        versionName "0.1.3"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

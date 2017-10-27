@@ -1,9 +1,11 @@
 # UpdateChecker
 Update Checker For Google Play
+![Image of UpdateChecker](/airbnb/lottie-android/blob/master/IntroPic/updatechecker.png)
 
 [![](https://jitpack.io/v/kobeumut/UpdateChecker.svg)](https://jitpack.io/#kobeumut/UpdateChecker)
 Used Google Volley(HTTP Library) for check version.
 
+![Image of UpdateChecker](/airbnb/lottie-android/blob/master/IntroPic/updateChecker.gif)
 
 Add it in your root build.gradle at the end of repositories:
 

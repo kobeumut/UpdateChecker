@@ -5,6 +5,11 @@ Update Checker For Google Play
 
 [![](https://jitpack.io/v/kobeumut/UpdateChecker.svg)](https://jitpack.io/#kobeumut/UpdateChecker)
 
+# New Features
+* Add new super looking alert dialog
+* Fix bugs and improve performance performance fixes
+* Auto show Whats New list on Google Play Market by language
+
 **Used Libraries:**
 
 * Google Volley(HTTP Library) for network.

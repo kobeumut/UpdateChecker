@@ -1,6 +1,8 @@
 <resources>
-    <string name="app_name">vChecker</string>
+    <string name="app_name">UpdateChecker</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
-    <string name="update_available">A new version of the app is available. You need to update the current version.</string>
+    <string name="update_available_text">A new version of the app is available. You need to update the current version.</string>
+    <string name="update">Update</string>
+    <string name="update_available_title">Update Available</string>
 </resources>

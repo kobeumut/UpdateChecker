@@ -5,7 +5,12 @@ Update Checker For Google Play
 
 [![](https://jitpack.io/v/kobeumut/UpdateChecker.svg)](https://jitpack.io/#kobeumut/UpdateChecker)
 
-Used Google Volley(HTTP Library) for check version.
+**Used Libraries:**
+
+* Google Volley(HTTP Library) for network.
+* AwesomeDialog for AlertDialog
+
+**Screenshots:**
 
 ![](/IntroPic/updateChecker.gif)
 
@@ -22,7 +27,7 @@ Add it in your root build.gradle at the end of repositories:
 Add the dependency
 
 	dependencies {
-	        compile 'com.github.kobeumut:UpdateChecker:0.1.2'
+	        compile 'com.github.kobeumut:UpdateChecker:0.1.3'
 	}
   
   
@@ -42,15 +47,22 @@ Or Maven
 	<dependency>
 	    <groupId>com.github.kobeumut</groupId>
 	    <artifactId>UpdateChecker</artifactId>
-	    <version>0.1.2</version>
+	    <version>0.1.3</version>
 	</dependency>
 
 
 # Usage
+
+
 ```
  Activity activity=this;
  new GoogleChecker(activity, false);
 ```
+
+Additional parameters is lang for language and package name for search in market
+
+**Usage 1: Package Name**
+
 İf you want to option a cancel you can send second parameters to true.
 
 And if you send a difference package name
@@ -58,6 +70,23 @@ And if you send a difference package name
  Activity activity=this;
  new GoogleChecker("com.grisoft.umut.uBackup",activity, false);
 ```
+
+**Usage 2: Package Name + Language**
+
+```
+ Activity activity=this;
+ new GoogleChecker("com.grisoft.umut.uBackup",activity, false, "en");
+```
+
+**Usage 3: Language**
+
+```
+ Activity activity=this;
+ new GoogleChecker(activity, false, "en");
+```
+
+
+
 # Licence
 Copyright 2017 Gri Software Inc.
 

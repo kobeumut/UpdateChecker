@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">vChecker</string>
+    <string name="app_name">UpdateChecker</string>
     <string name="ok">Tamam</string>
     <string name="cancel">İptal</string>
-    <string name="update_available">Uygulamanın yeni sürümü mevcut. Güncel versiyonu yüklemeniz gerekmektedir.</string>
+    <string name="update_available_text">Uygulamanın yeni sürümü mevcut. Güncel versiyonu yüklemeniz gerekmektedir.</string>
+    <string name="update">Güncelle</string>
+    <string name="update_available_title">GÜNCEL SÜRÜM</string>
 </resources>

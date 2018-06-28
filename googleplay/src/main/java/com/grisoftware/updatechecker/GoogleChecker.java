@@ -35,8 +35,8 @@ import java.io.InputStreamReader;
 public class GoogleChecker {
 
     private final String PLAY_STORE_ROOT_WEB = "https://play.google.com/store/apps/details?id=";
-    private final String PLAY_STORE_HTML_TAGS_TO_GET_VERSION = "<div class=\"BgcNfc\">Current Version</div><span class=\"htlgb\"><div><span class=\"htlgb\">";
-    private final String PLAY_STORE_HTML_TAGS_TO_GET_VERSION_END = "</span></div></span></div><div class=\"hAyfc\">";
+    private final String PLAY_STORE_HTML_TAGS_TO_GET_VERSION="<div class=\"BgcNfc\">Current Version</div><span class=\"htlgb\"><div><span class=\"htlgb\">";
+    private final String PLAY_STORE_HTML_TAGS_TO_GET_VERSION_END="</span></div></span></div><div class=\"hAyfc\">";
     private final String PLAY_STORE_HTML_TAGS_TO_GET_WHATS_NEW = "<div class=\"details-section whatsnew\">";
     private final String PLAY_STORE_HTML_TAGS_TO_GET_WHATS_NEW_END = "<div class=\"show-more-end\"";
     private final String PLAY_STORE_PACKAGE_NOT_PUBLISHED_IDENTIFIER = "We're sorry, the requested URL was not found on this server.";

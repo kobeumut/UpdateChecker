@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/UpdateChecker.iml" filepath="$PROJECT_DIR$/UpdateChecker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/UpdateChecker.iml" filepath="$PROJECT_DIR$/UpdateChecker.iml" />
       <module fileurl="file://$PROJECT_DIR$/googleplay/app.iml" filepath="$PROJECT_DIR$/googleplay/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/googleplay/googleplay.iml" filepath="$PROJECT_DIR$/googleplay/googleplay.iml" />
       <module fileurl="file://$PROJECT_DIR$/googleplay/googleplay.iml" filepath="$PROJECT_DIR$/googleplay/googleplay.iml" />
     </modules>
   </component>

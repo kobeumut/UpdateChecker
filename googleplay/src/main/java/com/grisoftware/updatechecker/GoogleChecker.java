@@ -43,7 +43,6 @@ import java.util.ArrayList;
 public class GoogleChecker {
 
     private final String PLAY_STORE_ROOT_WEB = "https://play.google.com/store/apps/details?id=";
-    
     public boolean isThereNewVersion;
     private String marketVersion;
     private String TAG = "UpdateChecker";

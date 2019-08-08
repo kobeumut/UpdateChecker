@@ -1,1 +1,1 @@
-include ':googleplay'
+include ':googleplay', ':sample'

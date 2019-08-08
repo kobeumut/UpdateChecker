@@ -1,14 +1,14 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 29
 
     defaultConfig {
         minSdkVersion 15
-        targetSdkVersion 27
+        targetSdkVersion 29
         versionCode 1
         versionName "0.1.4.1"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -20,11 +20,12 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'androidx.appcompat:appcompat:1.0.2'
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation ('com.android.support.test.espresso:espresso-core:3.0.1', {
+    androidTestImplementation ('androidx.test.espresso:espresso-core:3.1.0', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.volley:volley:1.0.0'
-    compile 'com.github.blennerSilva:AwesomeDialog:2.0.5'
+    implementation 'com.android.volley:volley:1.1.0'
+    implementation 'org.jsoup:jsoup:1.11.3'
+    implementation 'com.github.blennerSilva:AwesomeDialog:2.0.6'
 }

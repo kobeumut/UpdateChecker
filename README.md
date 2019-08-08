@@ -32,7 +32,7 @@ Add it in your root build.gradle at the end of repositories:
 Add the dependency
 
 	dependencies {
-	        compile 'com.github.kobeumut:UpdateChecker:0.1.3'
+	        compile 'com.github.kobeumut:UpdateChecker:0.2.0'
 	}
   
   
@@ -52,7 +52,7 @@ Or Maven
 	<dependency>
 	    <groupId>com.github.kobeumut</groupId>
 	    <artifactId>UpdateChecker</artifactId>
-	    <version>0.1.3</version>
+	    <version>0.2.0</version>
 	</dependency>
 
 

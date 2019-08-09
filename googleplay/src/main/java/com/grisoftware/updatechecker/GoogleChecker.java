@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
@@ -16,12 +18,6 @@ import android.util.Log;
 
 import androidx.core.text.HtmlCompat;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.awesomedialog.blennersilva.awesomedialoglibrary.AwesomeSuccessDialog;
 import com.awesomedialog.blennersilva.awesomedialoglibrary.interfaces.Closure;
 
@@ -29,11 +25,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
 
 
 /**
@@ -83,30 +75,41 @@ public class GoogleChecker {
 
     protected boolean isOnline() {
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo netInfo = null;
-        if (cm != null) {
-            netInfo = cm.getActiveNetworkInfo();
-        }
-        if (netInfo != null && netInfo.isConnectedOrConnecting()) {
-            return true;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (cm != null) {
+                Network network = null;
+                network = cm.getActiveNetwork();
+                NetworkCapabilities capabilities = cm.getNetworkCapabilities(network);
+                return capabilities != null && (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) || capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR));
+            }else{
+                return false;
+            }
         } else {
-            return false;
+            NetworkInfo netInfo = null;
+            if (cm != null) {
+                netInfo = cm.getActiveNetworkInfo();
+            }
+            if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+                return true;
+            } else {
+                return false;
+            }
         }
     }
-
     private void control(final Context context, final Activity activity, final String url, final Boolean noButton) {
         final Boolean[] lastIsBigger = {false};
         if (isOnline()) {
-            String version = "";
             new Thread(new Runnable() {
                 @Override
                 public void run() {
                     try {
                         Document sayfa = Jsoup.connect(url).get();
                         Element version = sayfa.select("div.JHTxhe.IQ1z0d > div > div:nth-child(4) > span > div > span").first();
-                        html = sayfa.select("c-wiz:nth-child(3) > div.W4P4ne > div.PHBdkd > div.DWPxHb").first().html();
+                        String title = sayfa.select("c-wiz:nth-child(3) > div.W4P4ne > div.wSaTQd > h2").first().text();
+                        title = "<h3>"+title+"</h3>";
+                        html = title.concat("\n" + sayfa.select("c-wiz:nth-child(3) > div.W4P4ne > div.PHBdkd > div.DWPxHb > span").first().html() + "<br>");
                         marketVersion = version.text();
-                        Log.e("ve",marketVersion);
+                        Log.e("version", marketVersion);
 
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -120,16 +123,16 @@ public class GoogleChecker {
                         pInfo = context.getPackageManager().getPackageInfo(context
                                 .getPackageName(), 0);
                         version = String.valueOf(pInfo.versionName);
-                        if(version.split(".").length==marketVersion.split(".").length){
+                        if (version.split(".").length == marketVersion.split(".").length) {
                             newversion = Integer.valueOf(version != null ? version.replaceAll("[^\\d]", "") : "0");
                             newMarketVersion = Integer.valueOf(marketVersion.replaceAll("[^\\d]", ""));
-                        }else{
+                        } else {
                             StringBuilder sameOldVersion = new StringBuilder();
-                            String[] mv= marketVersion.split(".");
-                            for (String v:mv) {
-                                sameOldVersion.append(v+".");
+                            String[] mv = marketVersion.split(".");
+                            for (String v : mv) {
+                                sameOldVersion.append(v + ".");
                             }
-                            sameOldVersion = sameOldVersion.delete(mv.length*2-1,mv.length*2);
+                            sameOldVersion = sameOldVersion.delete(mv.length * 2 - 1, mv.length * 2);
                             lastIsBigger[0] = true;
                             newversion = Integer.valueOf(version != null ? version.replaceAll("[^\\d]", "") : "0");
                             newMarketVersion = Integer.valueOf(sameOldVersion.toString().replaceAll("[^\\d]", ""));
@@ -158,7 +161,7 @@ public class GoogleChecker {
                             if (isThereNewVersion) {
                                 AwesomeSuccessDialog successDialog = new AwesomeSuccessDialog(context)
                                         .setTitle(finalTitle)
-                                        .setMessage(HtmlCompat.fromHtml(html,0))
+                                        .setMessage(HtmlCompat.fromHtml(html, 0))
                                         .setColoredCircle(R.color.dialogSuccessBackgroundColor)
                                         .setDialogIconAndColor(R.drawable.ic_update_black_24dp, R.color.white)
                                         .setCancelable(noButton)
@@ -194,8 +197,6 @@ public class GoogleChecker {
                                                 }
                                             });
                                 }
-
-
                                 successDialog.show();
 
                             }
@@ -203,7 +204,7 @@ public class GoogleChecker {
                     });
                 }
             }).start();
-            
+
             isThereNewVersion = false;
         } else {
             Log.e("UpdateChecker", "No internet connection");

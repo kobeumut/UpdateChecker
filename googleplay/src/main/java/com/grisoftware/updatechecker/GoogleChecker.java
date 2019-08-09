@@ -16,12 +16,6 @@ import android.util.Log;
 
 import androidx.core.text.HtmlCompat;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.awesomedialog.blennersilva.awesomedialoglibrary.AwesomeSuccessDialog;
 import com.awesomedialog.blennersilva.awesomedialoglibrary.interfaces.Closure;
 
@@ -29,11 +23,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
 
 
 /**
@@ -43,7 +33,7 @@ import java.util.ArrayList;
 public class GoogleChecker {
 
     private final String PLAY_STORE_ROOT_WEB = "https://play.google.com/store/apps/details?id=";
-    
+
     public boolean isThereNewVersion;
     private String marketVersion;
     private String TAG = "UpdateChecker";
@@ -107,7 +97,7 @@ public class GoogleChecker {
                         Element version = sayfa.select("div.JHTxhe.IQ1z0d > div > div:nth-child(4) > span > div > span").first();
                         html = sayfa.select("c-wiz:nth-child(3) > div.W4P4ne > div.PHBdkd > div.DWPxHb").first().html();
                         marketVersion = version.text();
-                        Log.e("ve",marketVersion);
+                        Log.e("ve", marketVersion);
 
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -121,16 +111,16 @@ public class GoogleChecker {
                         pInfo = context.getPackageManager().getPackageInfo(context
                                 .getPackageName(), 0);
                         version = String.valueOf(pInfo.versionName);
-                        if(version.split(".").length==marketVersion.split(".").length){
+                        if (version.split(".").length == marketVersion.split(".").length) {
                             newversion = Integer.valueOf(version != null ? version.replaceAll("[^\\d]", "") : "0");
                             newMarketVersion = Integer.valueOf(marketVersion.replaceAll("[^\\d]", ""));
-                        }else{
+                        } else {
                             StringBuilder sameOldVersion = new StringBuilder();
-                            String[] mv= marketVersion.split(".");
-                            for (String v:mv) {
-                                sameOldVersion.append(v+".");
+                            String[] mv = marketVersion.split(".");
+                            for (String v : mv) {
+                                sameOldVersion.append(v + ".");
                             }
-                            sameOldVersion = sameOldVersion.delete(mv.length*2-1,mv.length*2);
+                            sameOldVersion = sameOldVersion.delete(mv.length * 2 - 1, mv.length * 2);
                             lastIsBigger[0] = true;
                             newversion = Integer.valueOf(version != null ? version.replaceAll("[^\\d]", "") : "0");
                             newMarketVersion = Integer.valueOf(sameOldVersion.toString().replaceAll("[^\\d]", ""));
@@ -159,7 +149,7 @@ public class GoogleChecker {
                             if (isThereNewVersion) {
                                 AwesomeSuccessDialog successDialog = new AwesomeSuccessDialog(context)
                                         .setTitle(finalTitle)
-                                        .setMessage(HtmlCompat.fromHtml(html,0))
+                                        .setMessage(HtmlCompat.fromHtml(html, 0))
                                         .setColoredCircle(R.color.dialogSuccessBackgroundColor)
                                         .setDialogIconAndColor(R.drawable.ic_update_black_24dp, R.color.white)
                                         .setCancelable(noButton)
@@ -204,7 +194,7 @@ public class GoogleChecker {
                     });
                 }
             }).start();
-            
+
             isThereNewVersion = false;
         } else {
             Log.e("UpdateChecker", "No internet connection");

@@ -12,7 +12,7 @@ Update Checker For Google Play
 
 **Used Libraries:**
 
-* Google Volley(HTTP Library) for network.
+* Jsoup for scrap.
 * AwesomeDialog for AlertDialog
 
 **Screenshots:**
@@ -32,7 +32,7 @@ Add it in your root build.gradle at the end of repositories:
 Add the dependency
 
 	dependencies {
-	        compile 'com.github.kobeumut:UpdateChecker:0.2.0'
+	        compile 'com.github.kobeumut:UpdateChecker:0.2.1'
 	}
   
   
@@ -52,7 +52,7 @@ Or Maven
 	<dependency>
 	    <groupId>com.github.kobeumut</groupId>
 	    <artifactId>UpdateChecker</artifactId>
-	    <version>0.2.0</version>
+	    <version>0.2.1</version>
 	</dependency>
 
 
@@ -60,7 +60,6 @@ Or Maven
 
 
 ```
- Activity activity=this;
  new GoogleChecker(activity, false);
 ```
 
@@ -72,21 +71,18 @@ Additional parameters is lang for language and package name for search in market
 
 And if you send a difference package name
 ```
- Activity activity=this;
  new GoogleChecker("com.grisoft.umut.uBackup",activity, false);
 ```
 
 **Usage 2: Package Name + Language**
 
 ```
- Activity activity=this;
  new GoogleChecker("com.grisoft.umut.uBackup",activity, false, "en");
 ```
 
 **Usage 3: Language**
 
 ```
- Activity activity=this;
  new GoogleChecker(activity, false, "en");
 ```
 

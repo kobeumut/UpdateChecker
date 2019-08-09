@@ -25,7 +25,6 @@ dependencies {
     androidTestImplementation ('androidx.test.espresso:espresso-core:3.1.0', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    implementation 'com.android.volley:volley:1.1.0'
     implementation 'org.jsoup:jsoup:1.11.3'
     implementation 'com.github.blennerSilva:AwesomeDialog:2.0.6'
 }

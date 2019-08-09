@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
@@ -73,30 +75,41 @@ public class GoogleChecker {
 
     protected boolean isOnline() {
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo netInfo = null;
-        if (cm != null) {
-            netInfo = cm.getActiveNetworkInfo();
-        }
-        if (netInfo != null && netInfo.isConnectedOrConnecting()) {
-            return true;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (cm != null) {
+                Network network = null;
+                network = cm.getActiveNetwork();
+                NetworkCapabilities capabilities = cm.getNetworkCapabilities(network);
+                return capabilities != null && (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) || capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR));
+            }else{
+                return false;
+            }
         } else {
-            return false;
+            NetworkInfo netInfo = null;
+            if (cm != null) {
+                netInfo = cm.getActiveNetworkInfo();
+            }
+            if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+                return true;
+            } else {
+                return false;
+            }
         }
     }
-
     private void control(final Context context, final Activity activity, final String url, final Boolean noButton) {
         final Boolean[] lastIsBigger = {false};
         if (isOnline()) {
-            String version = "";
             new Thread(new Runnable() {
                 @Override
                 public void run() {
                     try {
                         Document sayfa = Jsoup.connect(url).get();
                         Element version = sayfa.select("div.JHTxhe.IQ1z0d > div > div:nth-child(4) > span > div > span").first();
-                        html = sayfa.select("c-wiz:nth-child(3) > div.W4P4ne > div.PHBdkd > div.DWPxHb").first().html();
+                        String title = sayfa.select("c-wiz:nth-child(3) > div.W4P4ne > div.wSaTQd > h2").first().text();
+                        title = "<h3>"+title+"</h3>";
+                        html = title.concat("\n" + sayfa.select("c-wiz:nth-child(3) > div.W4P4ne > div.PHBdkd > div.DWPxHb > span").first().html() + "<br>");
                         marketVersion = version.text();
-                        Log.e("ve", marketVersion);
+                        Log.e("version", marketVersion);
 
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -184,8 +197,6 @@ public class GoogleChecker {
                                                 }
                                             });
                                 }
-
-
                                 successDialog.show();
 
                             }

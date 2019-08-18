@@ -1,6 +1,8 @@
 # UpdateChecker
 Update Checker For Google Play
 
+@see Kotlin version: [__Kotlinify__](https://github.com/kotlinify/UpdateChecker)
+
 ![](/IntroPic/updatechecker.png)
 
 [![](https://jitpack.io/v/kobeumut/UpdateChecker.svg)](https://jitpack.io/#kobeumut/UpdateChecker)
